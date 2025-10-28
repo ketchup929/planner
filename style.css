@@ -1,0 +1,40 @@
+* {
+    line-height: 1.5;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+*:not(h1) {
+    font-size: 20px;
+}
+
+input {
+    padding: 4px 4px;
+}
+
+#textAndButton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.additionalToTask{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#date {
+    gap: 15px;
+}
+
+#selectSubAndCreateSub {
+    gap: 15px;
+}
