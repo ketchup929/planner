@@ -19,25 +19,38 @@
                 <button>Add To To-Do-List</button>
             </div>
         </div>
+
         <div class="additionalToTask">
+
             <span>Add Some Filters:</span>
+
             <div id="date">
                 <div id="from">
                     <span>From Date</span>
-                    <input type="date">
+                    <input type="date" id="dateFrom">
                 </div>
 
                 <div id="to">
                     <span>To Date</span>
-                    <input type="date">
+                    <input type="date" id="dateTo">
                 </div>
             </div>
 
-            <div id="subject">
-                <select id="">
-                    
-                </select>
+            <div id="selectSubAndCreateSub">
+                <div id="subject">
+                    <span>Select The Subject</span>
+                    <select id="">
+                        <option value="study">Study</option>
+                        <option value="work">Work</option>
+                        <option value="rest">Rest</option>
+                    </select>
+                </div>
+                <div id="addSubject">
+                    <div><input type="text" id="newSubject"></div>
+                    <div><button>Add Subject</button></div>
+                </div>
             </div>
+
         </div>
     </main>
 </body>
