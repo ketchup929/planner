@@ -18,23 +18,55 @@ input {
     gap: 5px;
 }
 
+body{
+    background-color: powderblue;
+}
+
 main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
+}
+
+.fieldForTask {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.between {
+    color: black;
 }
 
 .additionalToTask{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 #date {
-    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 #selectSubAndCreateSub {
+    display: flex;
+    flex-direction: row;
     gap: 15px;
+}
+
+#subject {
+    display: flex;
+    flex-direction: column;
+}
+
+#addSubject {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
