@@ -16,12 +16,11 @@
             <span>Write your task:</span>
             <div id="textAndButton">
                 <textarea id="task"></textarea>
-                <button>Add To To-Do-List</button>
+                <button class="addToList">Add To To-Do-List</button>
             </div>
         </div>
 
         <div class="additionalToTask">
-
             <span>Add Some Filters:</span>
 
             <div id="date">
@@ -39,18 +38,24 @@
             <div id="selectSubAndCreateSub">
                 <div id="subject">
                     <span>Select The Subject</span>
-                    <select id="">
+                    <select id="subjects">
                         <option value="study">Study</option>
                         <option value="work">Work</option>
                         <option value="rest">Rest</option>
                     </select>
                 </div>
+                <span>OR</span>
                 <div id="addSubject">
+                    <span>Create A New Subject</span>
                     <div><input type="text" id="newSubject"></div>
-                    <div><button>Add Subject</button></div>
+                    <div><button class="newSubject">Add Subject</button></div>
                 </div>
             </div>
 
+        </div>
+
+        <div class="tasksList">
+            
         </div>
     </main>
 </body>
