@@ -5,10 +5,10 @@ let date_to = document.querySelector("#dateTo")
 let subject = document.querySelector("#subjects")
 let created_subject = document.querySelector("#newSubject")
 let add_subject = document.querySelector(".newSubject")
-// let tasks = document.querySelector(".tasksList")
+let tasks_block = document.querySelector(".tasksList")
 
 addToList.addEventListener("click", ()=>{
-    let newTaskValue = document.querySelector('.task_name').value
+    let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
         "isDone": false
@@ -18,11 +18,7 @@ addToList.addEventListener("click", ()=>{
 })
 
 
-let tasks = [
-    {
-        "name": "do my homework", "isDone": false
-    }
-]
+let tasks = []
 
 const showTask = (task, index) => {
     return `<div class="task">
@@ -64,6 +60,11 @@ const updateTask = (index) => {
         const newValue = document.querySelector('#newValue').value
         setValueTask(index, newValue)
     })
+}
+
+const closeForm = () => {
+    box_update.classList.add('close')
+    box_update.classList.remove('open')
 }
 
 const setValueTask = (index, newValue) => {
