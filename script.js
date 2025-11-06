@@ -11,7 +11,10 @@ addToList.addEventListener("click", ()=>{
     let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
-        "isDone": false
+        "isDone": false,
+        "dateFrom": date_from,
+        "dateTo": date_to,
+        "taskSubject": subject
     }
     tasks.push(newTask)
     showAllTasks()
