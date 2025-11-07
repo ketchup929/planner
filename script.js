@@ -26,15 +26,19 @@ let tasks = []
 
 const showTask = (task, index) => {
     return `<div class="task">
-    <div class="namePlusdatePlusSubject">
-    <p class='task_text ${task.isDone ? 'done' : 'notdone'}'>${task.name}</p>
-    <p>Date: ${task.dateFrom ? task.dateFrom : 'No date'} - ${task.dateTo ? task.dateTo : 'No date'}</p>
-    <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
-    </div>
-    <div class="buttons">
-    <button class='task_button' onclick='delTask(${index})'>delete</button>
-    <button class='task_button' onclick='updateTask(${index})'>update</button>
-    </div>
+        <div class="namePlusdatePlusSubject">
+            <p class='task_text ${task.isDone ? 'done' : 'notdone'}'>${task.name}</p>
+            <p>Date: ${task.dateFrom ? task.dateFrom : 'No date'} - ${task.dateTo ? task.dateTo : 'No date'}</p>
+            <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
+        </div>
+        <div class="buttons">
+            <div>
+                <button class='task_button' onclick='delTask(${index})'>delete</button>
+            </div>
+            <div>
+                <button class='task_button' onclick='updateTask(${index})'>update</button>
+            </div>
+        </div>
     </div>`
 }
 
