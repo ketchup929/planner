@@ -7,7 +7,13 @@
     font-size: 20px;
 }
 
-input {
+main button, main input, main select, main textarea{
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+    border-radius: 3px;
+}
+
+input, select, textarea {
     padding: 4px 4px;
 }
 
@@ -99,9 +105,9 @@ main {
 }
 
 .namePlusdatePlusSubject {
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: bisque;
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+    border-radius: 3px;
     padding: 10px;
 }
 
@@ -114,3 +120,18 @@ main {
     color: black;
 }
 
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons button{
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+    border-radius: 3px;
+}
+
+@media screen and (max-width:767px) and (min-width:300px) {
+    
+}
