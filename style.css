@@ -113,6 +113,12 @@ main {
     padding: 10px;
 }
 
+.tasksList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .namePlusdatePlusSubject {
     background-color: rgb(255, 243, 229);
     border: 2px solid rgb(195, 134, 58);
@@ -168,4 +174,10 @@ main {
         flex-direction: column;
         gap: 20px;
     }
+}
+
+.invalid {
+    border: 3px solid red;
+    background-color: rgb(255, 172, 172);
+    border-radius: 3px;
 }
