@@ -36,7 +36,7 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    if (errors == true) return
+    // if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
@@ -92,33 +92,31 @@ const updateTask = (index) => {
     box_update.classList.remove('close')
     box_update.classList.add('open')
     box_update.innerHTML = 
-    `<div>
-        <p>Current Task</p>
-        <input type="text" id="newValue" value="${tasks[index].name}">
-        
-        <div id="from">
-            <span>From Date</span>
-            <input type="date" id="newDateFrom" value="${tasks[index].dateFrom || ''}">
-        </div>
+    `<span>Current Task</span>
+    <input type="text" id="newValue" value="${tasks[index].name}">
+    
+    <div id="from">
+        <span>From Date</span>
+        <input type="date" id="newDateFrom" value="${tasks[index].dateFrom || ''}">
+    </div>
 
-        <div id="to">
-            <span>To Date</span>
-            <input type="date" id="newDateTo" value="${tasks[index].dateTo || ''}">
-        </div>
-        
-        <div id="subject">
-            <span>Select The Subject</span>
-            <select id="newSubject">
-                <option value="study" ${tasks[index].taskSubject === 'study' ? 'selected' : ''}>Study</option>
-                <option value="work" ${tasks[index].taskSubject === 'work' ? 'selected' : ''}>Work</option>
-                <option value="rest" ${tasks[index].taskSubject === 'rest' ? 'selected' : ''}>Rest</option>
-            </select>
-        </div>
-        
-        <div>
-            <button id="update_button">update</button>
-            <button onclick="closeForm()">cancel</button>
-        </div>
+    <div id="to">
+        <span>To Date</span>
+        <input type="date" id="newDateTo" value="${tasks[index].dateTo || ''}">
+    </div>
+    
+    <div id="subject">
+        <span>Select The Subject</span>
+        <select id="newSubject">
+            <option value="study" ${tasks[index].taskSubject === 'study' ? 'selected' : ''}>Study</option>
+            <option value="work" ${tasks[index].taskSubject === 'work' ? 'selected' : ''}>Work</option>
+            <option value="rest" ${tasks[index].taskSubject === 'rest' ? 'selected' : ''}>Rest</option>
+        </select>
+    </div>
+    
+    <div>
+        <button id="update_button">update</button>
+        <button onclick="closeForm()">cancel</button>
     </div>`
 
     const update_button = document.querySelector('#update_button')
