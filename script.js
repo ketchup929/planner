@@ -180,6 +180,7 @@ const updateTask = (index) => {
 const closeForm = () => {
     box_update.classList.add('close')
     box_update.classList.remove('open')
+    box_update.innerHTML = ''
 }
 
 const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
