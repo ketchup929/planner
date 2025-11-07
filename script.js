@@ -18,11 +18,16 @@ addToList.addEventListener("click", ()=>{
         task.classList.remove('invalid')
     }
 
-    if (date_from.value == "" || date_to.value == "") {
+    if (date_from.value == "" || date_to.value == "" || (date_to.value - date_from.value < 0)) {
         if (date_from.value == "") date_from.classList.add('invalid')
         if (date_to.value == "") date_to.classList.add('invalid')
         errors = true
     } 
+    else if (new Date(date_from.value) > new Date(date_to.value)) {
+        date_from.classList.add('invalid')
+        date_to.classList.add('invalid')
+        errors = true
+    }
     else {
         date_from.classList.remove('invalid')
         date_to.classList.remove('invalid')
@@ -36,7 +41,7 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    // if (errors == true) return
+    if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
