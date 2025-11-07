@@ -127,12 +127,39 @@ const updateTask = (index) => {
 
     const update_button = document.querySelector('#update_button')
     update_button.addEventListener('click', ()=> {
-        const newValue = document.querySelector('#newValue').value
-        const newDateFrom = document.querySelector('#newDateFrom').value
-        const newDateTo = document.querySelector('#newDateTo').value
+        const newValueInput = document.querySelector('#newValue')
+        const newDateFromInput = document.querySelector('#newDateFrom')
+        const newDateToInput = document.querySelector('#newDateTo')
         const newSubject = document.querySelector('#newSubject').value
         
-        setValueTask(index, newValue, newDateFrom, newDateTo, newSubject)
+        let errors = false;
+
+        if (newValueInput.value == "") {
+            newValueInput.classList.add('invalid')
+            errors = true
+        } 
+        else {
+            newValueInput.classList.remove('invalid')
+        }
+
+        if (newDateFromInput.value == "" || newDateToInput.value == "") {
+            if (newDateFromInput.value == "") newDateFromInput.classList.add('invalid')
+            if (newDateToInput.value == "") newDateToInput.classList.add('invalid')
+            errors = true
+        } 
+        else if (new Date(newDateFromInput.value) > new Date(newDateToInput.value)) {
+            newDateFromInput.classList.add('invalid')
+            newDateToInput.classList.add('invalid')
+            errors = true
+        }
+        else {
+            newDateFromInput.classList.remove('invalid')
+            newDateToInput.classList.remove('invalid')
+        }
+
+        if (errors == true) return
+        
+        setValueTask(index, newValueInput.value, newDateFromInput.value, newDateToInput.value, newSubject)
     })
 }
 
