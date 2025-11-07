@@ -41,7 +41,7 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    if (errors == true) return
+    // if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
@@ -90,6 +90,7 @@ const showAllTasks = () => {
 
 const delTask = (index) => {
     tasks.splice(index, 1)
+    if (box_update.classList.contains('open')) closeForm()
     showAllTasks()
 }
 
