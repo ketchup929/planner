@@ -7,10 +7,22 @@
     font-size: 20px;
 }
 
-main button, main input, main select, main textarea{
+main input, main select, main textarea{
     background-color: rgb(225, 251, 255);
     border: 2px solid rgb(51, 157, 171);
     border-radius: 3px;
+}
+
+main button{
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+    border-radius: 3px;
+}
+
+main button:hover {
+    background-color: rgb(135, 200, 210);
+    border: 2px solid rgb(51, 157, 171);
+    cursor: pointer;
 }
 
 input, select, textarea {
@@ -84,16 +96,29 @@ main {
 }
 
 .open {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* gap: 10px; */
-    /* top: 50%;
-    left: 50%; */
-    background-color: rgb(255, 179, 151); 
-    /* coral */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgb(255, 179, 151); /* coral */
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px;
+}
+
+.open button, select, input, textarea {
+    background-color: rgb(255, 229, 218);
+    border: 2px solid rgb(221, 112, 73);
+    border-radius: 3px;
+}
+
+.open button:hover{
+    background-color: rgb(255, 155, 112);
+    border: 2px solid rgb(255, 97, 40);
+    cursor: pointer;
+}
+
+#newSubject {
+    width: 50%;
 }
 
 .mainPlusBoxForUpdate {
@@ -124,6 +149,18 @@ main {
     border: 2px solid rgb(195, 134, 58);
     border-radius: 3px;
     padding: 10px;
+}
+
+.task .buttons button {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+    border-radius: 3px;
+}
+
+.task .buttons button:hover {
+    background-color: rgb(255, 216, 171);
+    border: 2px solid rgb(195, 134, 58);
+    cursor: pointer;
 }
 
 .done {
