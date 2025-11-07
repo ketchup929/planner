@@ -288,3 +288,7 @@ main {
     flex-direction: column;
     gap: 10px;
 }
+
+.checked {
+    accent-color: rgb(195, 134, 58);
+}
