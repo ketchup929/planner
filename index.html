@@ -10,48 +10,53 @@
     <header>
         <h1>My Planner</h1>
     </header>
-
+    <div class="mainPlusBoxForUpdate">
     <main>
-        <div class="fieldForTask">
-            <span>Write your task:</span>
-            <div id="textAndButton">
-                <textarea id="task"></textarea>
-                <button class="addToList">Add To To-Do-List</button>
+        <div class="taskAndAdd">
+            <div class="fieldForTask">
+                <span>Write your task:</span>
+                <div id="textForTask">
+                    <textarea id="task"></textarea>
+                    
+                </div>
+            </div>
+
+            <div class="additionalToTask">
+                <span>Add Some Filters:</span>
+
+                <div id="date">
+                    <div id="from">
+                        <span>From Date</span>
+                        <input type="date" id="dateFrom">
+                    </div>
+
+                    <div id="to">
+                        <span>To Date</span>
+                        <input type="date" id="dateTo">
+                    </div>
+                </div>
+
+                <div id="selectSubAndCreateSub">
+                    <div id="subject">
+                        <span>Select The Subject</span>
+                        <select id="subjects">
+                            <option value="Study">Study</option>
+                            <option value="Work">Work</option>
+                            <option value="Rest">Rest</option>
+                        </select>
+                    </div>
+                    <span>OR</span>
+                    <div id="addSubject">
+                        <span>Type A New Subject</span>
+                        <div><input type="text" id="newSubject"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="additionalToTask">
-            <span>Add Some Filters:</span>
-
-            <div id="date">
-                <div id="from">
-                    <span>From Date</span>
-                    <input type="date" id="dateFrom">
-                </div>
-
-                <div id="to">
-                    <span>To Date</span>
-                    <input type="date" id="dateTo">
-                </div>
-            </div>
-
-            <div id="selectSubAndCreateSub">
-                <div id="subject">
-                    <span>Select The Subject</span>
-                    <select id="subjects">
-                        <option value="study">Study</option>
-                        <option value="work">Work</option>
-                        <option value="rest">Rest</option>
-                    </select>
-                </div>
-                <span>OR</span>
-                <div id="addSubject">
-                    <span>Create A New Subject</span>
-                    <div><input type="text" id="newSubject"></div>
-                    <div><button class="newSubject">Add Subject</button></div>
-                </div>
-            </div>
-
+        <div class="addToList">
+            <button>Add To To-Do-List</button>
         </div>
 
         <div class="tasksList">
@@ -59,6 +64,7 @@
         </div>
     </main>
     <div id="box_update" class="close"></div>
+    </div>
 </body>
 
 <script src="script.js">
