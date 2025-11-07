@@ -25,14 +25,20 @@ main button:hover {
     cursor: pointer;
 }
 
+.mainPlusBoxForUpdate {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
 input, select, textarea {
     padding: 4px 4px;
 }
 
-#textAndButton {
+#taskAndAdd {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 5px;
 }
 
@@ -121,7 +127,7 @@ main {
     width: 50%;
 }
 
-.mainPlusBoxForUpdate {
+main {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -191,6 +197,8 @@ main {
 }
 
 @media screen and (max-width:767px) and (min-width:300px) {
+    
+
     body {
         padding: 10px;
     }
@@ -210,6 +218,48 @@ main {
     .taskAndAdd {
         flex-direction: column;
         gap: 20px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    header {
+        text-align: center;
+    }
+
+    .mainPlusBoxForUpdate {
+        align-items: center;
+    }
+    
+    main {
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+    }
+    
+    .taskAndAdd {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .addToList {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .tasksList {
+        width: 100%;
+        max-width: 800px;
+    }
+    
+    #box_update {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .open {
+        width: 100%;
+        max-width: 500px;
     }
 }
 
