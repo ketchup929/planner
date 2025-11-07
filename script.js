@@ -8,6 +8,33 @@ let add_subject = document.querySelector(".newSubject")
 let tasks_block = document.querySelector(".tasksList")
 
 addToList.addEventListener("click", ()=>{
+
+    if (task.value == "") {
+        task.classList.add('invalid')
+        return
+    } 
+    else {
+        task.classList.remove('invalid')
+    }
+
+    if (date_from.value == "" || date_to.value == "") {
+        date_from.classList.add('invalid')
+        date_to.classList.add('invalid')
+        return
+    } 
+    else {
+        date_from.classList.remove('invalid')
+        date_to.classList.remove('invalid')
+    }
+
+    let taskSubjectValue;
+    if (created_subject.value !== "") {
+        taskSubjectValue = created_subject.value
+    } 
+    else {
+        taskSubjectValue = subject.value
+    }
+
     let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
@@ -19,6 +46,7 @@ addToList.addEventListener("click", ()=>{
     tasks.push(newTask)
     showAllTasks()
     task.value = ''
+    created_subject.value = ''
 })
 
 
