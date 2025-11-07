@@ -64,15 +64,17 @@ let tasks = []
 
 const showTask = (task, index) => {
     return `<div class="task">
-        <div class="namePlusdatePlusSubject">
-            <p class='task_text ${task.isDone ? 'done' : 'notdone'}'>${task.name}</p>
+        <div class="namePlusdatePlusSubject ${task.isDone ? 'done' : 'notdone'}">
+            <p>${task.name}</p>
             <p>From ${task.dateFrom ? task.dateFrom : 'No date'}</p>
-            <p>To ${task.dateTo ? task.dateTo : 'No date'}</p>     <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
+            <p>To ${task.dateTo ? task.dateTo : 'No date'}</p>     
+            <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
         </div>
 
         <div class="checkAndBut">
             <div class="checked">
-                <input type="checkbox" id="done" value="done">Done
+                <input type="checkbox" id="done_${index}" ${task.isDone ? 'checked' : ''} onchange="toggleDone(${index})">
+                <label for="done_${index}">Done</label>
             </div>
 
             <div class="buttons">
@@ -85,6 +87,11 @@ const showTask = (task, index) => {
             </div>
         </div>
     </div>`
+}
+
+const toggleDone = (index) => {
+    tasks[index].isDone = !tasks[index].isDone;
+    showAllTasks();
 }
 
 const showAllTasks = () => {
