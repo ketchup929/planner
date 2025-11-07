@@ -69,6 +69,11 @@ const showTask = (task, index) => {
             <p>From ${task.dateFrom ? task.dateFrom : 'No date'}</p>
             <p>To ${task.dateTo ? task.dateTo : 'No date'}</p>     <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
         </div>
+
+        <div class="checked">
+            <input type="checkbox" id="done" value="done">Done
+        </div>
+
         <div class="buttons">
             <div>
                 <button class='task_button' onclick='delTask(${index})'>delete</button>
