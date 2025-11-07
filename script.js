@@ -8,19 +8,20 @@ let add_subject = document.querySelector(".newSubject")
 let tasks_block = document.querySelector(".tasksList")
 
 addToList.addEventListener("click", ()=>{
+    let errors = false;
 
     if (task.value == "") {
         task.classList.add('invalid')
-        return
+        errors = true
     } 
     else {
         task.classList.remove('invalid')
     }
 
     if (date_from.value == "" || date_to.value == "") {
-        date_from.classList.add('invalid')
-        date_to.classList.add('invalid')
-        return
+        if (date_from.value == "") date_from.classList.add('invalid')
+        if (date_to.value == "") date_to.classList.add('invalid')
+        errors = true
     } 
     else {
         date_from.classList.remove('invalid')
@@ -35,17 +36,21 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
+    if (errors == true) return
+
     let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
         "isDone": false,
         "dateFrom": date_from.value,
         "dateTo": date_to.value,
-        "taskSubject": subject.value
+        "taskSubject": taskSubjectValue 
     }
     tasks.push(newTask)
     showAllTasks()
     task.value = ''
+    date_from.value = ''
+    date_to.value = ''
     created_subject.value = ''
 })
 
@@ -56,8 +61,8 @@ const showTask = (task, index) => {
     return `<div class="task">
         <div class="namePlusdatePlusSubject">
             <p class='task_text ${task.isDone ? 'done' : 'notdone'}'>${task.name}</p>
-            <p>Date: ${task.dateFrom ? task.dateFrom : 'No date'} - ${task.dateTo ? task.dateTo : 'No date'}</p>
-            <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
+            <p>From ${task.dateFrom ? task.dateFrom : 'No date'}</p>
+            <p>To ${task.dateTo ? task.dateTo : 'No date'}</p>     <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
         </div>
         <div class="buttons">
             <div>
@@ -132,7 +137,7 @@ const closeForm = () => {
     box_update.classList.remove('open')
 }
 
-const setValueTask = (index, newValue) => {
+const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
     let newTasks = [
         ...tasks.slice(0,index),
         {
