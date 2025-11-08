@@ -57,9 +57,9 @@ input, select, textarea {
     gap: 5px;
 }
 
-body{
+/* body{
     background-color: powderblue;
-}
+} */
 
 main {
     display: flex;
@@ -336,7 +336,6 @@ footer a{
 
 .tasksColumns {
     display: flex;
-    /* flex-direction: column; */
     gap: 20px;
     width: 100%;
 }
@@ -385,68 +384,510 @@ footer a{
 
 
 
+/* /////////////////////// light /////////////////////// */
 
 
-.light-theme {
+body.light-theme {
     background-color: powderblue;
-    color: #333;
+    color: black;
+}
+
+.light-theme hr {
+    border: 3px solid rgb(51, 157, 171);
+}
+
+.light-theme main input,
+.light-theme main select,
+.light-theme main textarea {
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+}
+
+.light-theme main button {
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+}
+
+.light-theme main button:hover {
+    background-color: rgb(135, 200, 210);
+    border: 2px solid rgb(51, 157, 171);
+}
+
+.light-theme .fieldForTask,
+.light-theme .additionalToTask {
+    border: 2px solid black;
+}
+
+.light-theme .open {
+    background-color: rgb(255, 179, 151);
+    border: 2px solid black;
+}
+
+.light-theme .open button,
+.light-theme .open select,
+.light-theme .open input,
+.light-theme .open textarea {
+    background-color: rgb(255, 229, 218);
+    border: 2px solid rgb(221, 112, 73);
+}
+
+.light-theme .open button:hover {
+    background-color: rgb(255, 155, 112);
+    border: 2px solid rgb(255, 97, 40);
+}
+
+.light-theme .task {
+    border: 2px solid rgb(195, 134, 58);
+    background-color: bisque;
+}
+
+.light-theme .namePlusdatePlusSubject {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .task .buttons button {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .task .buttons button:hover {
+    background-color: rgb(255, 216, 171);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .buttons button {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .namePlusdatePlusSubject.done {
+    color: gray;
+}
+
+.light-theme .checked {
+    accent-color: rgb(195, 134, 58);
+}
+
+.light-theme .column {
+    border: 2px solid rgb(51, 157, 171);
+    background-color: rgb(225, 251, 255);
+}
+
+.light-theme .column h3 {
+    color: rgb(51, 157, 171);
+}
+
+.light-theme .status-btn {
+    border: 1px solid rgb(51, 157, 171);
+    background-color: white;
+    color: black;
+}
+
+.light-theme .status-btn.active {
+    background-color: rgb(51, 157, 171);
+    color: white;
+}
+
+.light-theme .admin {
+    border: 2px solid rgb(87, 87, 87);
+    background-color: rgb(225, 251, 255);
+}
+
+.light-theme .admin h2 {
+    color: rgb(51, 157, 171);
+}
+
+.light-theme .admin-section {
+    border: 3px solid rgb(87, 87, 87);
+    background-color: white;
+    color: black;
+}
+
+.light-theme .stats span {
+    color: rgb(51, 157, 171);
+}
+
+
+/* .light-theme input, .light-theme select, .light-theme textarea{
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+    border-radius: 3px;
+}
+
+.light-theme button{
+    background-color: rgb(225, 251, 255);
+    border: 2px solid rgb(51, 157, 171);
+    border-radius: 3px;
+}
+
+.light-theme button:hover {
+    background-color: rgb(135, 200, 210);
+    border: 2px solid rgb(51, 157, 171);
+    cursor: pointer;
+}
+
+.light-theme body{
+    background-color: powderblue;
+}
+
+.light-theme .fieldForTask {
+    border: 2px solid black;
+}
+
+.light-theme .between {
+    color: black;
+}
+
+.light-theme .additionalToTask{
+    border: 2px solid black;
+}
+
+.light-theme .open {
+    background-color: rgb(255, 179, 151);
+    border: 2px solid black;
+}*/
+
+.light-theme .open button, .light-theme select, input, .light-theme textarea {
+    background-color: rgb(255, 229, 218);
+    border: 2px solid rgb(221, 112, 73);
+}
+
+.light-theme .open button:hover{
+    background-color: rgb(255, 155, 112);
+    border: 2px solid rgb(255, 97, 40);
+}
+
+.light-theme .task {
+    display: flex;
+    border: 2px solid rgb(195, 134, 58);
+    background-color: bisque;
+}
+
+.light-theme .namePlusdatePlusSubject {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .task .buttons button {
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .task .buttons button:hover {
+    background-color: rgb(255, 216, 171);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .buttons button{
+    background-color: rgb(255, 243, 229);
+    border: 2px solid rgb(195, 134, 58);
+}
+
+.light-theme .namePlusdatePlusSubject.done {
+    color: gray;
+}
+
+.light-theme .namePlusdatePlusSubject:not(.done) {
+    color: black;
+}
+
+.light-theme .checked {
+    accent-color: rgb(195, 134, 58);
+}
+
+.light-theme .column {
+    border: 2px solid rgb(51, 157, 171);
+    background-color: rgb(225, 251, 255);
+}
+
+.light-theme .column h3 {
+    color: rgb(51, 157, 171);
+}
+
+.light-theme .status-btn {
+    border: 1px solid rgb(51, 157, 171);
+    background-color: white;
+}
+
+.light-theme .status-btn.active {
+    background-color: rgb(51, 157, 171);
+    color: white;
+} */
+
+/* /////////////////////// dark /////////////////////// */
+
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .dark-theme {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-theme hr {
+    border: 3px solid #666666;
 }
 
 .dark-theme main input,
 .dark-theme main select,
-.dark-theme main textarea,
-.dark-theme main button {
-    background-color: #34495e;
-    border-color: #3498db;
-    color: #ecf0f1;
+.dark-theme main textarea {
+    background-color: #2d2d2d;
+    border: 2px solid #555555;
+    color: #ffffff;
 }
 
-.dark-theme .column {
-    background-color: #34495e;
-    border-color: #3498db;
-    color: #ecf0f1;
+.dark-theme main button {
+    background-color: #2d2d2d;
+    border: 2px solid #555555;
+    color: #ffffff;
+}
+
+.dark-theme main button:hover {
+    background-color: #444444;
+    border: 2px solid #777777;
+}
+
+.dark-theme .fieldForTask,
+.dark-theme .additionalToTask {
+    border: 2px solid #666666;
+}
+
+.dark-theme .open {
+    background-color: #333333;
+    border: 2px solid #666666;
+}
+
+.dark-theme .open button,
+.dark-theme .open select,
+.dark-theme .open input,
+.dark-theme .open textarea {
+    background-color: #404040; 
+    border: 2px solid #777777;
+    color: #ffffff;
+}
+
+.dark-theme .open button:hover {
+    background-color: #555555;
+    border: 2px solid #888888;
 }
 
 .dark-theme .task {
-    background-color: #2c3e50;
-    border-color: #3498db;
+    border: 2px solid #666666;
+    background-color: #2d2d2d;
 }
 
 .dark-theme .namePlusdatePlusSubject {
-    background-color: #34495e;
-    border-color: #3498db;
-    color: #ecf0f1;
+    background-color: #333333;
+    border: 2px solid #666666;
+    color: #ffffff;
 }
 
-.blue-theme {
-    background-color: #e3f2fd;
-    color: #1565c0;
+.dark-theme .task .buttons button {
+    background-color: #333333;
+    border: 2px solid #666666;
+    color: #ffffff;
 }
 
-.blue-theme main input,
-.blue-theme main select,
-.blue-theme main textarea,
-.blue-theme main button {
-    background-color: #bbdefb;
-    border-color: #1976d2;
-    color: #0d47a1;
+.dark-theme .task .buttons button:hover {
+    background-color: #444444;
+    border: 2px solid #777777;
 }
 
-.blue-theme .column {
-    background-color: #bbdefb;
-    border-color: #1976d2;
-    color: #0d47a1;
+.dark-theme .buttons button {
+    background-color: #333333;
+    border: 2px solid #666666;
+    color: #ffffff;
 }
+
+.dark-theme .namePlusdatePlusSubject.done {
+    color: #888888;
+}
+
+.dark-theme .checked {
+    accent-color: #888888;
+}
+
+.dark-theme .column {
+    border: 2px solid #555555;
+    background-color: #2d2d2d;
+}
+
+.dark-theme .column h3 {
+    color: #ffffff;
+}
+
+.dark-theme .status-btn {
+    border: 1px solid #555555;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.dark-theme .status-btn.active {
+    background-color: #555555;
+    color: #ffffff;
+}
+
+.dark-theme .admin {
+    border: 2px solid #555555;
+    background-color: #2d2d2d;
+}
+
+.dark-theme .admin h2 {
+    color: #ffffff;
+}
+
+.dark-theme .admin-section {
+    border: 3px solid #555555;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.dark-theme .stats span {
+    color: #cccccc;
+}
+
+/* /////////////////////// green /////////////////////// */
+
+
+
+body.green-theme {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+.green-theme hr {
+    border: 3px solid #38a169;
+}
+
+.green-theme main input,
+.green-theme main select,
+.green-theme main textarea {
+    background-color: #f0fff4;
+    border: 2px solid #38a169;
+    color: #22543d;
+}
+
+.green-theme main button {
+    background-color: #f0fff4;
+    border: 2px solid #38a169;
+    color: #22543d;
+}
+
+.green-theme main button:hover {
+    background-color: #9ae6b4;
+    border: 2px solid #38a169;
+}
+
+.green-theme .fieldForTask,
+.green-theme .additionalToTask {
+    border: 2px solid #22543d;
+}
+
+.green-theme .open {
+    background-color: #fed7d7;
+    border: 2px solid #22543d;
+}
+
+.green-theme .open button,
+.green-theme .open select,
+.green-theme .open input,
+.green-theme .open textarea {
+    background-color: #feebc8;
+    border: 2px solid #dd6b20;
+    color: #22543d;
+}
+
+.green-theme .open button:hover {
+    background-color: #fbd38d;
+    border: 2px solid #ed8936;
+}
+
+.green-theme .task {
+    border: 2px solid #d69e2e;
+    background-color: #feebc8;
+}
+
+.green-theme .namePlusdatePlusSubject {
+    background-color: #fefcbf;
+    border: 2px solid #d69e2e;
+    color: #22543d;
+}
+
+.green-theme .task .buttons button {
+    background-color: #fefcbf;
+    border: 2px solid #d69e2e;
+    color: #22543d;
+}
+
+.green-theme .task .buttons button:hover {
+    background-color: #faf089;
+    border: 2px solid #d69e2e;
+}
+
+.green-theme .buttons button {
+    background-color: #fefcbf;
+    border: 2px solid #d69e2e;
+    color: #22543d;
+}
+
+.green-theme .namePlusdatePlusSubject.done {
+    color: #68d391;
+}
+
+.green-theme .checked {
+    accent-color: #d69e2e;
+}
+
+.green-theme .column {
+    border: 2px solid #38a169;
+    background-color: #f0fff4;
+}
+
+.green-theme .column h3 {
+    color: #22543d;
+}
+
+.green-theme .status-btn {
+    border: 1px solid #38a169;
+    background-color: white;
+    color: #22543d;
+}
+
+.green-theme .status-btn.active {
+    background-color: #38a169;
+    color: white;
+}
+
+.green-theme .admin {
+    border: 2px solid #38a169;
+    background-color: #f0fff4;
+}
+
+.green-theme .admin h2 {
+    color: #22543d;
+}
+
+.green-theme .admin-section {
+    border: 3px solid #38a169;
+    background-color: white;
+    color: #22543d;
+}
+
+.green-theme .stats span {
+    color: #22543d;
+}
+
+
+
+/* /////// */
 
 .admin {
     margin: 20px 0;
     padding: 20px;
-    border: 2px solid rgb(51, 157, 171);
+    border: 2px solid rgb(87, 87, 87);
     border-radius: 8px;
     background-color: rgb(225, 251, 255);
 }
@@ -465,9 +906,9 @@ footer a{
 }
 
 .admin-section {
-    min-width: 200px;
+    min-width: 80%;
     padding: 15px;
-    border: 3px solid rgb(51, 157, 171);
+    border: 3px solid rgb(87, 87, 87);
     border-radius: 5px;
     background-color: white;
 }
