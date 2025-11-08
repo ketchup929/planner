@@ -253,13 +253,13 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
 }
 
 const changeTheme = (theme) => {
-    document.body.classList.remove('light-theme', 'dark-theme', 'blue-theme');
+    document.body.classList.remove('light-theme', 'dark-theme', 'green-theme');
     document.body.classList.add(theme + '-theme');
 }
 
 document.getElementById('deleteAllTasks').addEventListener('click', deleteAllTasks);
 
-document.getElementById('themeSelector').addEventListener('change', () => {
+document.getElementById('themeSelector').addEventListener('change', function() {
     changeTheme(this.value);
 });
 
