@@ -1,4 +1,4 @@
-let addToList = document.querySelector(".addToList")
+let addToList = document.querySelector(".addToList button")
 let task = document.querySelector("#task")
 let date_from = document.querySelector("#dateFrom")
 let date_to = document.querySelector("#dateTo")
@@ -6,6 +6,7 @@ let subject = document.querySelector("#subjects")
 let created_subject = document.querySelector("#newSubject")
 let add_subject = document.querySelector(".newSubject")
 let tasks_block = document.querySelector(".tasksList")
+let box_update = document.querySelector('#box_update')
 
 addToList.addEventListener("click", ()=>{
     let errors = false;
@@ -46,13 +47,15 @@ addToList.addEventListener("click", ()=>{
     let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
-        "isDone": false,
+        // "isDone": false,
+        "status": 'planned',
         "dateFrom": date_from.value,
         "dateTo": date_to.value,
         "taskSubject": taskSubjectValue 
     }
     tasks.push(newTask)
     showAllTasks()
+
     task.value = ''
     date_from.value = ''
     date_to.value = ''
@@ -94,12 +97,23 @@ const toggleDone = (index) => {
     showAllTasks();
 }
 
+const changeStatus = (index, newStatus) => {
+    tasks[index].status = newStatus;
+    showAllTasks();
+}
+
 const showAllTasks = () => {
-    let s=''
-    tasks.map((item, index) => {
-        s+=showTask(item, index)
-    })
-    tasks_block.innerHTML=s
+    
+    document.querySelector('.planned').innerHTML = '';
+    document.querySelector('.in-progress').innerHTML = '';
+    document.querySelector('.done').innerHTML = '';
+    
+    tasks.forEach((item, index) => {
+        const column = document.querySelector(`.${item.status}`);
+        if (column) {
+            column.innerHTML += showTask(item, index);
+        }
+    });
 }
 
 const delTask = (index) => {
@@ -188,7 +202,7 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
         ...tasks.slice(0,index),
         {
             "name": newValue,
-            "isDone": tasks[index].isDone,
+            "isDone": tasks[index].status,
             "dateFrom": newDateFrom,
             "dateTo": newDateTo,
             "taskSubject": newSubject
@@ -196,6 +210,7 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
         ...tasks.slice(index+1)
     ]
     tasks = newTasks
+    
     closeForm()
     showAllTasks()
 }
