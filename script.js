@@ -42,12 +42,11 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    // if (errors == true) return
+    if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
         "name" : newTaskValue,
-        // "isDone": false,
         "status": 'planned',
         "dateFrom": date_from.value,
         "dateTo": date_to.value,
@@ -61,6 +60,10 @@ addToList.addEventListener("click", ()=>{
     date_from.value = ''
     date_to.value = ''
     created_subject.value = ''
+
+    task.classList.remove('invalid')
+    date_from.classList.remove('invalid') 
+    date_to.classList.remove('invalid')
 })
 
 let tasks = []
@@ -163,13 +166,20 @@ const updateTask = (index) => {
         <input type="date" id="newDateTo" value="${tasks[index].dateTo || ''}">
     </div>
     
-    <div id="subject">
-        <span>Select The Subject</span>
-        <select id="newSubject">
-            <option value="study" ${tasks[index].taskSubject === 'study' ? 'selected' : ''}>Study</option>
-            <option value="work" ${tasks[index].taskSubject === 'work' ? 'selected' : ''}>Work</option>
-            <option value="rest" ${tasks[index].taskSubject === 'rest' ? 'selected' : ''}>Rest</option>
-        </select>
+    <div id="selectSubAndCreateSub">
+        <div id="subject">
+            <span>Select The Subject</span>
+            <select id="newSubjectSelect">
+                <option value="Study" ${tasks[index].taskSubject === 'Study' ? 'selected' : ''}>Study</option>
+                <option value="Work" ${tasks[index].taskSubject === 'Work' ? 'selected' : ''}>Work</option>
+                <option value="Home" ${tasks[index].taskSubject === 'Home' ? 'selected' : ''}>Home</option>
+            </select>
+        </div>
+        <span>OR</span>
+        <div id="addSubject">
+            <span>Type A New Subject</span>
+            <div><input type="text" id="newSubjectInput" placeholder="New subject"></div>
+        </div>
     </div>
     
     <div>
@@ -182,8 +192,17 @@ const updateTask = (index) => {
         const newValueInput = document.querySelector('#newValue')
         const newDateFromInput = document.querySelector('#newDateFrom')
         const newDateToInput = document.querySelector('#newDateTo')
-        const newSubject = document.querySelector('#newSubject').value
+        const newSubjectSelect = document.querySelector('#newSubjectSelect')
+        const newSubjectInput = document.querySelector('#newSubjectInput')
         
+        let taskSubjectValue;
+        if (newSubjectInput.value !== "") {
+            taskSubjectValue = newSubjectInput.value
+        } 
+        else {
+            taskSubjectValue = newSubjectSelect.value
+        }
+
         let errors = false;
 
         if (newValueInput.value == "") {
@@ -211,7 +230,7 @@ const updateTask = (index) => {
 
         if (errors == true) return
         
-        setValueTask(index, newValueInput.value, newDateFromInput.value, newDateToInput.value, newSubject)
+        setValueTask(index, newValueInput.value, newDateFromInput.value, newDateToInput.value, taskSubjectValue)
     })
 }
 
@@ -238,7 +257,7 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
         ...tasks.slice(0,index),
         {
             "name": newValue,
-            "isDone": tasks[index].status,
+            "status": tasks[index].status,
             "dateFrom": newDateFrom,
             "dateTo": newDateTo,
             "taskSubject": newSubject
