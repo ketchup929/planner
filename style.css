@@ -305,6 +305,14 @@ main {
     border-radius: 3px;
 }
 
+.light-theme .invalid,
+.dark-theme .invalid, 
+.green-theme .invalid {
+    border: 3px solid red !important;
+    background-color: rgb(255, 172, 172) !important;
+    color: black !important;
+}
+
 .checkAndBut {
     display: flex;
     flex-direction: column;
