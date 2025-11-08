@@ -55,13 +55,13 @@ addToList.addEventListener("click", ()=>{
     }
     tasks.push(newTask)
     showAllTasks()
+    updateStats()
 
     task.value = ''
     date_from.value = ''
     date_to.value = ''
     created_subject.value = ''
 })
-
 
 let tasks = []
 
@@ -110,6 +110,7 @@ const toggleDone = (index) => {
 const changeStatus = (index, newStatus) => {
     tasks[index].status = newStatus;
     showAllTasks();
+    updateStats();
 }
 
 const showAllTasks = () => {
@@ -117,8 +118,6 @@ const showAllTasks = () => {
     document.querySelector('.planned').innerHTML = '';
     document.querySelector('.in-progress').innerHTML = '';
     document.querySelector('.done').innerHTML = '';
-    
-    console.log('All tasks:', tasks); // для отладки
     
     tasks.forEach((item, index) => {
         const column = document.querySelector(`.${item.status}`);
@@ -132,6 +131,19 @@ const delTask = (index) => {
     tasks.splice(index, 1)
     if (box_update.classList.contains('open')) closeForm()
     showAllTasks()
+    updateStats()
+}
+
+const deleteAllTasks = () => {
+    if (tasks.length == 0) {
+        return;
+    }
+    
+    else {
+        tasks = [];
+        showAllTasks();
+        updateStats();
+    }
 }
 
 const updateTask = (index) => {
@@ -203,6 +215,18 @@ const updateTask = (index) => {
     })
 }
 
+const updateStats = () => {
+    const totalTasks = tasks.length;
+    const plannedTasks = tasks.filter(task => task.status === 'planned').length;
+    const inProgressTasks = tasks.filter(task => task.status === 'in-progress').length;
+    const doneTasks = tasks.filter(task => task.status === 'done').length;
+    
+    document.getElementById('totalTasks').textContent = totalTasks;
+    document.getElementById('plannedTasks').textContent = plannedTasks;
+    document.getElementById('inProgressTasks').textContent = inProgressTasks;
+    document.getElementById('doneTasks').textContent = doneTasks;
+}
+
 const closeForm = () => {
     box_update.classList.add('close')
     box_update.classList.remove('open')
@@ -225,4 +249,18 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
     
     closeForm()
     showAllTasks()
+    updateStats()
 }
+
+const changeTheme = (theme) => {
+    document.body.classList.remove('light-theme', 'dark-theme', 'blue-theme');
+    document.body.classList.add(theme + '-theme');
+}
+
+document.getElementById('deleteAllTasks').addEventListener('click', deleteAllTasks);
+
+document.getElementById('themeSelector').addEventListener('change', () => {
+    changeTheme(this.value);
+});
+
+updateStats();
