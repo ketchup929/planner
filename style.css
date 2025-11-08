@@ -184,12 +184,12 @@ main {
     cursor: pointer;
 }
 
-.done {
+.namePlusdatePlusSubject.done {
     text-decoration: line-through;
     color: gray;
 }
 
-.notdone {
+.namePlusdatePlusSubject:not(.done) {
     color: black;
 }
 
@@ -237,6 +237,10 @@ main {
         flex-direction: column;
         gap: 20px;
     }
+
+    .tasksColumns {
+        flex-direction: column;
+    }
 }
 
 @media screen and (min-width:768px) {
@@ -282,7 +286,8 @@ main {
     }
 
     .tasksColumns {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
@@ -323,10 +328,9 @@ footer a{
 
 .tasksColumns {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: column; */
     gap: 20px;
     width: 100%;
-    justify-content: space-between;
 }
 
 .column {
@@ -369,3 +373,7 @@ footer a{
     background-color: rgb(51, 157, 171);
     color: white;
 }
+
+
+
+
