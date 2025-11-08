@@ -65,19 +65,29 @@ addToList.addEventListener("click", ()=>{
 
 let tasks = []
 
-const showTask = (task, index) => {
+const showTask = (taskItem, index) => {
     return `<div class="task">
-        <div class="namePlusdatePlusSubject ${task.isDone ? 'done' : 'notdone'}">
-            <p>${task.name}</p>
-            <p>From ${task.dateFrom ? task.dateFrom : 'No date'}</p>
-            <p>To ${task.dateTo ? task.dateTo : 'No date'}</p>     
-            <p>Subject: ${task.taskSubject ? task.taskSubject : 'No subject'}</p>
+        <div class="namePlusdatePlusSubject ${taskItem.status === 'done' ? 'done' : ''}">
+            <p>${taskItem.name}</p>
+            <p>From ${taskItem.dateFrom ? taskItem.dateFrom : 'No date'}</p>
+            <p>To ${taskItem.dateTo ? taskItem.dateTo : 'No date'}</p>     
+            <p>Subject: ${taskItem.taskSubject ? taskItem.taskSubject : 'No subject'}</p>
         </div>
 
         <div class="checkAndBut">
-            <div class="checked">
-                <input type="checkbox" id="done_${index}" ${task.isDone ? 'checked' : ''} onchange="toggleDone(${index})">
-                <label for="done_${index}">Done</label>
+            <div class="status-checkboxes">
+                <div class="checked">
+                    <input type="checkbox" id="planned_${index}" ${taskItem.status === 'planned' ? 'checked' : ''} onchange="changeStatus(${index}, 'planned')">
+                    <label for="planned_${index}">To Do</label>
+                </div>
+                <div class="checked">
+                    <input type="checkbox" id="in-progress_${index}" ${taskItem.status === 'in-progress' ? 'checked' : ''} onchange="changeStatus(${index}, 'in-progress')">
+                    <label for="in-progress_${index}">In Progress</label>
+                </div>
+                <div class="checked">
+                    <input type="checkbox" id="done_${index}" ${taskItem.status === 'done' ? 'checked' : ''} onchange="changeStatus(${index}, 'done')">
+                    <label for="done_${index}">Done</label>
+                </div>
             </div>
 
             <div class="buttons">
@@ -107,6 +117,8 @@ const showAllTasks = () => {
     document.querySelector('.planned').innerHTML = '';
     document.querySelector('.in-progress').innerHTML = '';
     document.querySelector('.done').innerHTML = '';
+    
+    console.log('All tasks:', tasks); // для отладки
     
     tasks.forEach((item, index) => {
         const column = document.querySelector(`.${item.status}`);
