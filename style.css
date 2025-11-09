@@ -45,6 +45,8 @@ main button:hover {
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 input, select, textarea {
@@ -892,12 +894,22 @@ body.green-theme {
 
 /* /////// */
 
+.admin-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .admin {
     margin: 20px 0;
     padding: 20px;
     border: 2px solid rgb(87, 87, 87);
     border-radius: 8px;
     background-color: rgb(225, 251, 255);
+    width: 100%; 
+    max-width: 1200px; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .admin h2 {
