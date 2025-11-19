@@ -53,6 +53,7 @@ addToList.addEventListener("click", ()=>{
         "taskSubject": taskSubjectValue 
     }
     tasks.push(newTask)
+    updateLocalStorage()
     showAllTasks()
     updateStats()
 
@@ -66,10 +67,18 @@ addToList.addEventListener("click", ()=>{
     date_to.classList.remove('invalid')
 })
 
-let tasks = []
+!localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
+
+const updateLocalStorage = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+let draggedIndex = 0;
+
+// let tasks = []
 
 const showTask = (taskItem, index) => {
-    return `<div class="task">
+    return `<div class="task" draggable="true" ondragstart="setDraggedIndex(${index})" ondragend="">
         <div class="namePlusdatePlusSubject ${taskItem.status === 'done' ? 'done' : ''}">
             <p>${taskItem.name}</p>
             <p>From ${taskItem.dateFrom ? taskItem.dateFrom : 'No date'}</p>
