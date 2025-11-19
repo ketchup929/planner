@@ -14,7 +14,7 @@ let draggedTask = null;
 addToList.addEventListener("click", ()=>{
     let errors = false;
 
-    if (task.value == "" || task.value.length() < 3 || task.value.length() > 50) {
+    if (task.value == "" || task.value.length < 3 || task.value.length > 50) {
         task.classList.add('invalid')
         errors = true
     } 
@@ -92,10 +92,10 @@ const showTask = (taskItem, index) => {
         <div class="checkAndBut">
             <div class="buttons">
                 <div>
-                    <button class='task_button' onclick='delTask(${index})'>delete</button>
+                    <button class='task_button' data-index='${index}' data-action='delete'>delete</button>
                 </div>
                 <div>
-                    <button class='task_button' onclick='updateTask(${index})'>update</button>
+                    <button class='task_button' data-index='${index}' data-action='update'>update</button>
                 </div>
             </div>
         </div>
@@ -138,24 +138,22 @@ const setDraggedIndex = (index) => {
 
 const drop = (event) => {
     event.preventDefault();
-    const id = event.target.id;
-    console.log('drop index=' + draggedIndex + ' cat=' + id);
+    const id = event.currentTarget.id;
+    
+    console.log('drop target:', event.target, 'current target:', event.target, 'id:', id)
     
     if (id === 'planned') {
         console.log('Task dropped into category: planned');
         tasks[draggedIndex].status = 'planned';
     }
-    
-    if (id === 'in-progress') {
+    else if (id === 'in-progress') {
         console.log('Task dropped into category: in-progress');
         tasks[draggedIndex].status = 'in-progress';
     }
-    
-    if (id === 'done') {
+    else if (id === 'done') {
         console.log('Task dropped into category: done');
         tasks[draggedIndex].status = 'done';
     }
-    
     updateLocalStorage();
     showAllTasks();
     updateStats();
@@ -168,6 +166,19 @@ tasks_block.addEventListener('dragstart', (event) => {
 tasks_block.addEventListener('dragend', (event) => {
     event.target.classList.remove('selected')
 })
+
+tasks_block.addEventListener('click', (event) => {
+  if (event.target.classList.contains('task_button')) {
+    const button = event.target;
+    const index = parseInt(button.getAttribute('data-index'));
+    
+    if (button.textContent === 'delete') {
+      delTask(index);
+    } else if (button.textContent === 'update') {
+      updateTask(index);
+    }
+  }
+});
 
 const delTask = (index) => {
     tasks.splice(index, 1)
@@ -307,6 +318,7 @@ const setValueTask = (index, newValue, newDateFrom, newDateTo, newSubject) => {
     ]
     tasks = newTasks
     
+    updateLocalStorage();
     closeForm()
     showAllTasks()
     updateStats()
@@ -317,19 +329,28 @@ const changeTheme = (theme) => {
     document.body.classList.add(theme + '-theme');
 }
 
-document.getElementById('deleteAllTasks').addEventListener('click', deleteAllTasks);
+const deleteAllBtn = document.getElementById('deleteAllTasks');
+if (deleteAllBtn) {
+    deleteAllBtn.addEventListener('click', function() {
+        console.log('Delete All clicked');
+        deleteAllTasks();
+    });
+} else {
+    console.error('Delete All Tasks button not found!');
+}
 
-document.getElementById('themeSelector').addEventListener('change', function() {
-    changeTheme(this.value);
-});
+const themeSelector = document.getElementById('themeSelector');
+if (themeSelector) {
+    themeSelector.addEventListener('change', function() {
+        changeTheme(this.value);
+    });
+}
 
 const columns = document.querySelectorAll('.planned, .in-progress, .done');
-
 columns.forEach(column => {
     column.addEventListener('dragover', dragover);
     column.addEventListener('drop', drop);
 });
 
 showAllTasks();
-
 updateStats();
