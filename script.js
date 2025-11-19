@@ -1,3 +1,5 @@
+let tasks = !localStorage.tasks ? [] : JSON.parse(localStorage.getItem('tasks'));
+
 let addToList = document.querySelector(".addToList button")
 let task = document.querySelector("#task")
 let date_from = document.querySelector("#dateFrom")
@@ -7,11 +9,12 @@ let created_subject = document.querySelector("#newSubject")
 let add_subject = document.querySelector(".newSubject")
 let tasks_block = document.querySelector(".tasksList")
 let box_update = document.querySelector('#box_update')
+let draggedTask = null;
 
 addToList.addEventListener("click", ()=>{
     let errors = false;
 
-    if (task.value == "") {
+    if (task.value == "" || task.value.length() < 3 || task.value.length() > 50) {
         task.classList.add('invalid')
         errors = true
     } 
@@ -42,7 +45,7 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    if (errors == true) return
+    // if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
@@ -67,7 +70,7 @@ addToList.addEventListener("click", ()=>{
     date_to.classList.remove('invalid')
 })
 
-!localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
+// !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
 
 const updateLocalStorage = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -78,7 +81,7 @@ let draggedIndex = 0;
 // let tasks = []
 
 const showTask = (taskItem, index) => {
-    return `<div class="task" draggable="true" ondragstart="setDraggedIndex(${index})" ondragend="">
+    return `<div class="task" draggable="true" ondragstart="setDraggedIndex(${index})" ondragend="setDraggedIndex(${index})">
         <div class="namePlusdatePlusSubject ${taskItem.status === 'done' ? 'done' : ''}">
             <p>${taskItem.name}</p>
             <p>From ${taskItem.dateFrom ? taskItem.dateFrom : 'No date'}</p>
@@ -87,21 +90,6 @@ const showTask = (taskItem, index) => {
         </div>
 
         <div class="checkAndBut">
-            <div class="status-checkboxes">
-                <div class="checked">
-                    <input type="checkbox" id="planned_${index}" ${taskItem.status === 'planned' ? 'checked' : ''} onchange="changeStatus(${index}, 'planned')">
-                    <label for="planned_${index}">To Do</label>
-                </div>
-                <div class="checked">
-                    <input type="checkbox" id="in-progress_${index}" ${taskItem.status === 'in-progress' ? 'checked' : ''} onchange="changeStatus(${index}, 'in-progress')">
-                    <label for="in-progress_${index}">In Progress</label>
-                </div>
-                <div class="checked">
-                    <input type="checkbox" id="done_${index}" ${taskItem.status === 'done' ? 'checked' : ''} onchange="changeStatus(${index}, 'done')">
-                    <label for="done_${index}">Done</label>
-                </div>
-            </div>
-
             <div class="buttons">
                 <div>
                     <button class='task_button' onclick='delTask(${index})'>delete</button>
@@ -139,11 +127,54 @@ const showAllTasks = () => {
     });
 }
 
+const dragover = (event) => {
+    event.preventDefault();
+}
+
+const setDraggedIndex = (index) => {
+    draggedIndex = index;
+    console.log('drag = ' + index);
+}
+
+const drop = (event) => {
+    event.preventDefault();
+    const id = event.target.id;
+    console.log('drop index=' + draggedIndex + ' cat=' + id);
+    
+    if (id === 'planned') {
+        console.log('Task dropped into category: planned');
+        tasks[draggedIndex].status = 'planned';
+    }
+    
+    if (id === 'in-progress') {
+        console.log('Task dropped into category: in-progress');
+        tasks[draggedIndex].status = 'in-progress';
+    }
+    
+    if (id === 'done') {
+        console.log('Task dropped into category: done');
+        tasks[draggedIndex].status = 'done';
+    }
+    
+    updateLocalStorage();
+    showAllTasks();
+    updateStats();
+}
+
+tasks_block.addEventListener('dragstart', (event) => {
+    event.target.classList.add('selected')
+})
+
+tasks_block.addEventListener('dragend', (event) => {
+    event.target.classList.remove('selected')
+})
+
 const delTask = (index) => {
     tasks.splice(index, 1)
     if (box_update.classList.contains('open')) closeForm()
     showAllTasks()
     updateStats()
+    updateLocalStorage();
 }
 
 const deleteAllTasks = () => {
@@ -155,6 +186,7 @@ const deleteAllTasks = () => {
         tasks = [];
         showAllTasks();
         updateStats();
+        updateLocalStorage();
     }
 }
 
@@ -290,5 +322,14 @@ document.getElementById('deleteAllTasks').addEventListener('click', deleteAllTas
 document.getElementById('themeSelector').addEventListener('change', function() {
     changeTheme(this.value);
 });
+
+const columns = document.querySelectorAll('.planned, .in-progress, .done');
+
+columns.forEach(column => {
+    column.addEventListener('dragover', dragover);
+    column.addEventListener('drop', drop);
+});
+
+showAllTasks();
 
 updateStats();
