@@ -80,6 +80,11 @@ let draggedIndex = 0;
 
 // let tasks = []
 
+const setDraggedIndex = (index) => {
+    draggedIndex = index;
+    console.log('drag = ' + index);
+}
+
 const showTask = (taskItem, index) => {
     return `<div class="task" draggable="true" ondragstart="setDraggedIndex(${index})" ondragend="setDraggedIndex(${index})">
         <div class="namePlusdatePlusSubject ${taskItem.status === 'done' ? 'done' : ''}">
@@ -131,27 +136,20 @@ const dragover = (event) => {
     event.preventDefault();
 }
 
-const setDraggedIndex = (index) => {
-    draggedIndex = index;
-    console.log('drag = ' + index);
-}
+
 
 const drop = (event) => {
     event.preventDefault();
-    const id = event.currentTarget.id;
-    
-    console.log('drop target:', event.target, 'current target:', event.target, 'id:', id)
-    
-    if (id === 'planned') {
-        console.log('Task dropped into category: planned');
+    const dropTarget = event.target.closest('.planned, .in-progress, .done');
+    if (!dropTarget) return;
+
+    if (dropTarget.classList.contains('planned')) {
         tasks[draggedIndex].status = 'planned';
     }
-    else if (id === 'in-progress') {
-        console.log('Task dropped into category: in-progress');
+    else if (dropTarget.classList.contains('in-progress')) {
         tasks[draggedIndex].status = 'in-progress';
     }
-    else if (id === 'done') {
-        console.log('Task dropped into category: done');
+    else if (dropTarget.classList.contains('done')) {
         tasks[draggedIndex].status = 'done';
     }
     updateLocalStorage();
