@@ -115,44 +115,62 @@ const showAllTasks = () => {
     });
 }
 
-document.querySelectorAll('.task').forEach(taskElem => {
-    taskElem.addEventListener('dragstart', (event) => {
-        draggedIndex = Number(event.currentTarget.querySelector('button').getAttribute('data-index'));
-        event.currentTarget.classList.add('selected');
-    });
-    taskElem.addEventListener('dragend', (event) => {
-        event.currentTarget.classList.remove('selected');
-        draggedIndex = null;
-    });
+document.addEventListener('dragover', function(event) {
+    event.preventDefault();
 });
 
-const dragover = (event) => {
+document.addEventListener('drop', function(event) {
     event.preventDefault();
-}
-
-const drop = (event) => {
-    console.log('Drop handler called');
-    event.preventDefault();
-
-    const dropTarget = event.target.closest('.planned, .in-progress, .done');
-
-    if (!dropTarget) {
-        console.log('Drop target not found!');
-        return;
+    console.log('Drop to: ', event.target);
+    
+    let column = null;
+    
+    if (event.target.classList.contains('planned') || 
+        event.target.classList.contains('in-progress') || 
+        event.target.classList.contains('done')) {
+        column = event.target;
     }
-
-    if (dropTarget.classList.contains('planned')) {
-        tasks[draggedIndex].status = 'planned';
-    } else if (dropTarget.classList.contains('in-progress')) {
-        tasks[draggedIndex].status = 'in-progress';
-    } else if (dropTarget.classList.contains('done')) {
-        tasks[draggedIndex].status = 'done';
+    else if (event.target.closest('.planned')) {
+        column = document.querySelector('.planned');
     }
-
-    updateLocalStorage();
-    showAllTasks();
-    updateStats();
-};
+    else if (event.target.closest('.in-progress')) {
+        column = document.querySelector('.in-progress');
+    }
+    else if (event.target.closest('.done')) {
+        column = document.querySelector('.done');
+    }
+    else if (event.target.closest('.column')) {
+        const columnElement = event.target.closest('.column');
+        if (columnElement.querySelector('.planned')) {
+            column = columnElement.querySelector('.planned');
+        } else if (columnElement.querySelector('.in-progress')) {
+            column = columnElement.querySelector('.in-progress');
+        } else if (columnElement.querySelector('.done')) {
+            column = columnElement.querySelector('.done');
+        }
+    }
+    
+    console.log('Found:', column);
+    
+    if (column) {
+        console.log('Task ', draggedIndex, 'to ', column.className);
+        
+        let newStatus = 'planned';
+        if (column.classList.contains('in-progress')) {
+            newStatus = 'in-progress';
+        } else if (column.classList.contains('done')) {
+            newStatus = 'done';
+        }
+        
+        if (tasks[draggedIndex].status !== newStatus) {
+            tasks[draggedIndex].status = newStatus;
+            updateLocalStorage();
+            showAllTasks();
+            updateStats();
+            console.log('Status now:', newStatus);
+        }
+    }
+});
 
 document.addEventListener('dragstart', function(event) {
     event.target.classList.add('selected');
@@ -160,19 +178,6 @@ document.addEventListener('dragstart', function(event) {
 
 document.addEventListener('dragend', function(event) {
     event.target.classList.remove('selected');
-});
-
-tasks_block.addEventListener('click', (event) => {
-  if (event.target.classList.contains('task_button')) {
-    const button = event.target;
-    const index = parseInt(button.getAttribute('data-index'));
-    
-    if (button.textContent === 'delete') {
-      delTask(index);
-    } else if (button.textContent === 'update') {
-      updateTask(index);
-    }
-  }
 });
 
 const delTask = (index) => {
