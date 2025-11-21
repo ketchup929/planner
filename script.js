@@ -83,6 +83,7 @@ const showTask = (taskItem, index) => {
     return `<div class="task" draggable="true" ondragstart="setDraggedIndex(${index})" ondragend="setDraggedIndex(${index})">
         <div class="namePlusdatePlusSubject ${taskItem.status === 'done' ? 'done' : ''}">
             <p>${taskItem.name}</p>
+
             <p>From ${taskItem.dateFrom ? taskItem.dateFrom : 'No date'}</p>
             <p>To ${taskItem.dateTo ? taskItem.dateTo : 'No date'}</p>     
             <p>Subject: ${taskItem.taskSubject ? taskItem.taskSubject : 'No subject'}</p>
@@ -91,16 +92,15 @@ const showTask = (taskItem, index) => {
         <div class="checkAndBut">
             <div class="buttons">
                 <div>
-                    <button class='task_button' data-index='${index}' data-action='delete'>delete</button>
+                    <button onclick="delTask(${index})">delete</button>
                 </div>
                 <div>
-                    <button class='task_button' data-index='${index}' data-action='update'>update</button>
+                    <button onclick="updateTask(${index})">update</button>
                 </div>
             </div>
         </div>
     </div>`
 }
-
 const showAllTasks = () => {
     
     document.querySelector('.planned').innerHTML = '';
@@ -335,8 +335,6 @@ if (deleteAllBtn) {
         console.log('Delete All clicked');
         deleteAllTasks();
     });
-} else {
-    console.error('Delete All Tasks button not found!');
 }
 
 const themeSelector = document.getElementById('themeSelector');
