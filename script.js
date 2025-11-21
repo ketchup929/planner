@@ -1,5 +1,4 @@
 let tasks = !localStorage.tasks ? [] : JSON.parse(localStorage.getItem('tasks'));
-
 let addToList = document.querySelector(".addToList button")
 let task = document.querySelector("#task")
 let date_from = document.querySelector("#dateFrom")
@@ -9,6 +8,7 @@ let created_subject = document.querySelector("#newSubject")
 let add_subject = document.querySelector(".newSubject")
 let tasks_block = document.querySelector(".tasksList")
 let box_update = document.querySelector('#box_update')
+let draggedIndex = 0;
 let draggedTask = null;
 
 addToList.addEventListener("click", ()=>{
@@ -45,7 +45,7 @@ addToList.addEventListener("click", ()=>{
         taskSubjectValue = subject.value
     }
 
-    // if (errors == true) return
+    if (errors == true) return
 
     let newTaskValue = task.value
     let newTask = {
@@ -70,15 +70,9 @@ addToList.addEventListener("click", ()=>{
     date_to.classList.remove('invalid')
 })
 
-// !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
-
 const updateLocalStorage = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
-let draggedIndex = 0;
-
-// let tasks = []
 
 const setDraggedIndex = (index) => {
     draggedIndex = index;
@@ -107,17 +101,6 @@ const showTask = (taskItem, index) => {
     </div>`
 }
 
-const toggleDone = (index) => {
-    tasks[index].isDone = !tasks[index].isDone;
-    showAllTasks();
-}
-
-const changeStatus = (index, newStatus) => {
-    tasks[index].status = newStatus;
-    showAllTasks();
-    updateStats();
-}
-
 const showAllTasks = () => {
     
     document.querySelector('.planned').innerHTML = '';
@@ -132,38 +115,52 @@ const showAllTasks = () => {
     });
 }
 
+document.querySelectorAll('.task').forEach(taskElem => {
+    taskElem.addEventListener('dragstart', (event) => {
+        draggedIndex = Number(event.currentTarget.querySelector('button').getAttribute('data-index'));
+        event.currentTarget.classList.add('selected');
+    });
+    taskElem.addEventListener('dragend', (event) => {
+        event.currentTarget.classList.remove('selected');
+        draggedIndex = null;
+    });
+});
+
 const dragover = (event) => {
     event.preventDefault();
 }
 
-
-
 const drop = (event) => {
+    console.log('Drop handler called');
     event.preventDefault();
+
     const dropTarget = event.target.closest('.planned, .in-progress, .done');
-    if (!dropTarget) return;
+
+    if (!dropTarget) {
+        console.log('Drop target not found!');
+        return;
+    }
 
     if (dropTarget.classList.contains('planned')) {
         tasks[draggedIndex].status = 'planned';
-    }
-    else if (dropTarget.classList.contains('in-progress')) {
+    } else if (dropTarget.classList.contains('in-progress')) {
         tasks[draggedIndex].status = 'in-progress';
-    }
-    else if (dropTarget.classList.contains('done')) {
+    } else if (dropTarget.classList.contains('done')) {
         tasks[draggedIndex].status = 'done';
     }
+
     updateLocalStorage();
     showAllTasks();
     updateStats();
-}
+};
 
-tasks_block.addEventListener('dragstart', (event) => {
-    event.target.classList.add('selected')
-})
+document.addEventListener('dragstart', function(event) {
+    event.target.classList.add('selected');
+});
 
-tasks_block.addEventListener('dragend', (event) => {
-    event.target.classList.remove('selected')
-})
+document.addEventListener('dragend', function(event) {
+    event.target.classList.remove('selected');
+});
 
 tasks_block.addEventListener('click', (event) => {
   if (event.target.classList.contains('task_button')) {
@@ -343,12 +340,6 @@ if (themeSelector) {
         changeTheme(this.value);
     });
 }
-
-const columns = document.querySelectorAll('.planned, .in-progress, .done');
-columns.forEach(column => {
-    column.addEventListener('dragover', dragover);
-    column.addEventListener('drop', drop);
-});
 
 showAllTasks();
 updateStats();
