@@ -213,6 +213,11 @@ main {
     gap: 20px;
 }
 
+.addToList {
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width:767px) and (min-width:300px) {
     header {
         justify-content: center;
@@ -225,6 +230,15 @@ main {
 
     #date {
         flex-direction: column;
+    }
+
+    #to {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #to input {
+        width: 64%;
     }
 
     #selectSubAndCreateSub {
@@ -266,10 +280,7 @@ main {
         width: 100%;
     }
     
-    .addToList {
-        display: flex;
-        justify-content: center;
-    }
+    
     
     .tasksList {
         width: 100%;
@@ -968,3 +979,4 @@ body.green-theme {
     padding: 8px;
     margin-top: 5px;
 }
+
