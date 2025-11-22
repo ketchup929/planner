@@ -980,3 +980,6 @@ body.green-theme {
     margin-top: 5px;
 }
 
+.column.drag {
+    background-color: rgba(135, 200, 210, 0.3);
+}

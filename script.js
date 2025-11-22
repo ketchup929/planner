@@ -117,11 +117,25 @@ const showAllTasks = () => {
 
 document.addEventListener('dragover', function(event) {
     event.preventDefault();
+
+    let column = event.target.closest('.column');
+    
+    document.querySelectorAll('.column').forEach(col => {
+        col.classList.remove('drag');
+    });
+    
+    if (column) {
+        column.classList.add('drag');
+    }
 });
 
 document.addEventListener('drop', function(event) {
     event.preventDefault();
     console.log('Drop to: ', event.target);
+
+    document.querySelectorAll('.column').forEach(col => {
+        col.classList.remove('drag-over');
+    });
     
     let column = null;
     
@@ -171,7 +185,6 @@ document.addEventListener('drop', function(event) {
         }
     }
 });
-
 document.addEventListener('dragstart', function(event) {
     event.target.classList.add('selected');
 });
